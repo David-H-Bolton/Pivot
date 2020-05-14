@@ -13,6 +13,25 @@ Decryption is the reverse, provided the key is available.
 
 As there are 1.2688693e+89 possible keys, brute forcing this may take rather a while.  
 
+Compiling
+There is just one file pivot.c.
+
+Running it.
+A copy of libsodium.dll should be obtained/built from source and included in the same folder as pivot.exe.
+
+Usage:
+pivot /? will show these.
+
+pivot -options file1 file2 [ keyfile]
+Where options are either
+   -e = encrypt file 1 into file2 using keyfile
+   -d = decrypt file 1 into file2 using keyfile
+   -g = generate keyfile, creates key file or file1.key if keyfile name not supplied
+Examples
+pivot -e -g myfile.txt myfile.out myfile.key - encrypts myfile.txt into myfile.out using myfile.key
+pivot -e -g myfile.txt   - encrypts myfile.txt into myfile.pvt using generated keyfile myfile.key
+pivot -g afile.xyz       - generates keyfile.xyz
+
 Known Issues
 1. The decrypted file has some extra 0s bytes on the end due to blocking. Files that are not a multiple of 8 bytes in length will get rounded up to a multiple of 8. This will be fixed.
 2. This was developed on Windows. A Linux version (the only difference is the Windows file open functions called). A Linux version will be fortthcoming. 
